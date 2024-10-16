@@ -11,7 +11,10 @@ Route::group(
     function () {
         //本：ダッシュボード表示(books.blade.php)
         Route::get('/', [PostController::class, 'index'])->name('post_index');
-        Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [PostController::class, 'dashboard'])->name('dashboard');
+
+        //本：作成ボタン 
+        Route::get('/posts/create', [PostController::class, "create"])->name('post_create');
 
         //本：追加 
         Route::post('/posts', [PostController::class, "store"])->name('post_store');
