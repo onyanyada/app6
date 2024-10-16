@@ -15,7 +15,7 @@
        
     
     <!--右側エリア[START]-->
-    <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
+    <div class="text-gray-700 text-left px-4 py-2 m-2 w-screen">
          <!-- 現在の本 -->
         @if (count($posts) > 0)
             @foreach ($posts as $post)

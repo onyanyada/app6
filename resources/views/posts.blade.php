@@ -16,18 +16,18 @@
        
     
     <!--右側エリア[START]-->
-    <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
+    <div class="grid grid-cols-2 gap-4 w-screen text-gray-700 text-left px-4 py-2 m-2">
          <!-- 現在の本 -->
         @if (count($posts) > 0)
             @foreach ($posts as $post)
-                <x-collection id="{{ $post->id }}">
+                <x-homecollection id="{{ $post->id }}">
                   <a href="{{ route('post_show', ['post' => $post->id]) }}">
                     {{ $post->title }}
                   </a>
                  <!-- コメント数を表示 -->
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
-                </x-collection>
+                </x-homecollection>
             @endforeach
         @endif
     </div>
