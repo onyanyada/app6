@@ -5,6 +5,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PostController; //Add
 use App\Models\Post; //Add
+use App\Http\Controllers\CommentController;
+use App\Models\Comment; //Add
+
+
+
+// コメント投稿
+Route::post('/post/{post}/comments', [CommentController::class, 'store'])->name('comment.store');
+
+// コメント削除
+Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
 
 Route::group(
     ['middleware' => 'auth'],
