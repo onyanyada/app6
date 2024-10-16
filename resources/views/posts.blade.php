@@ -24,6 +24,8 @@
                   <a href="{{ route('post_show', ['post' => $post->id]) }}">
                     {{ $post->title }}
                   </a>
+                 <!-- コメント数を表示 -->
+                <p>{{ $post->comments->count() }} 件のコメント</p>
                 </x-collection>
             @endforeach
         @endif

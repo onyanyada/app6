@@ -15,7 +15,7 @@
         <!-- バリデーションエラーの表示に使用-->
     
     <!--全エリア[START]-->
-    <div class="flex bg-gray-100">
+    <div class="bg-gray-100">
 
         <!--左エリア[START]--> 
         <div class="text-gray-700 text-left px-4 py-4 m-2">
@@ -71,11 +71,7 @@
         <!--左エリア[END]--> 
     
     
-    <!--右側エリア[START]-->
-    <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
-      
-    </div>
-    <!--右側エリア[[END]-->       
+    
 
 </div>
  <!--全エリア[END]-->

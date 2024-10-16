@@ -47,6 +47,7 @@
         <!-- コメントの表示 -->
         <div>
             <h2>コメント一覧</h2>
+            <p>{{ $post->comments->count() }} 件のコメント</p>
             @if ($post->comments->count() > 0)
                 <ul>
                     @foreach ($post->comments as $comment)

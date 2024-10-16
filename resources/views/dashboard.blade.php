@@ -23,6 +23,9 @@
                     <a href="{{ route('post_show', ['post' => $post->id]) }}">
                         {{ $post->title }}
                     </a>
+                    @if (count($post->comments) > 0)
+                    <p>{{ $post->comments->count() }} 件のコメント</p>
+                    @endif
                 </x-collection>
             @endforeach
         @endif

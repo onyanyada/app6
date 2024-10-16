@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('is_public', true)->orderBy('created_at', 'asc')->get();
+        $posts = Post::with('comments')->where('is_public', true)->orderBy('created_at', 'asc')->get();
         return view('posts', [
             'posts' => $posts
         ]);
@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function dashboard()
     {
-        $posts = Post::where('user_id', Auth::user()->id)
+        $posts = Post::with('comments')->where('user_id', Auth::user()->id)
             ->where('is_public', false)
             ->orderBy('created_at', 'asc')->get();
         return view('dashboard', [
