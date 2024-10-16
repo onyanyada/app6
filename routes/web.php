@@ -19,6 +19,9 @@ Route::group(
         //本：追加 
         Route::post('/posts', [PostController::class, "store"])->name('post_store');
 
+        //本：詳細
+        Route::get('/postsshow/{post}', [PostController::class, "show"])->name('post_show');
+
         //本：削除 
         Route::delete('/post/{post}', [PostController::class, "destroy"])->name('post_destroy');
 

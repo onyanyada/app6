@@ -2,7 +2,7 @@
 
     <!--ヘッダー[START]-->
     <x-slot name="header">
-      
+
     </x-slot>
     <!--ヘッダー[END]-->
             
@@ -21,8 +21,9 @@
         @if (count($posts) > 0)
             @foreach ($posts as $post)
                 <x-collection id="{{ $post->id }}">
-                  {{ $post->title }}
-                  {{ $post->body }}
+                  <a href="{{ route('post_show', ['post' => $post->id]) }}">
+                    {{ $post->title }}
+                  </a>
                 </x-collection>
             @endforeach
         @endif

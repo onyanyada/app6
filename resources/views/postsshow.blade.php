@@ -2,6 +2,7 @@
 
     <!--ヘッダー[START]-->
     <x-slot name="header">
+
     </x-slot>
     <!--ヘッダー[END]-->
             
@@ -15,17 +16,20 @@
        
     
     <!--右側エリア[START]-->
-    <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
+    <div class="flex-1 text-gray-700 text-left bg-red-100 px-4 py-2 m-2">
          <!-- 現在の本 -->
-        @if (count($posts) > 0)
-            @foreach ($posts as $post)
-                <x-collection id="{{ $post->id }}">
-                    <a href="{{ route('post_show', ['post' => $post->id]) }}">
-                        {{ $post->title }}
-                    </a>
-                </x-collection>
-            @endforeach
-        @endif
+
+                <div id="{{ $post->id }}">
+                    ブログ内容
+                  {{ $post->title }}
+                  中身
+                  {{ $post->body }}
+                  作成日時
+                  {{ $post->created_at }}
+                  更新日時
+                  {{ $post->updated_at }}
+                </div>
+
     </div>
     <!--右側エリア[[END]-->     
 
