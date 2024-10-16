@@ -31,8 +31,31 @@
                 </div>
 
     </div>
+    <!-- いいねの表示 -->
+    <div>
+        @if($post->likes->where('user_id', Auth::id())->count() > 0)
+            <!-- いいねを取り消すボタン -->
+            <form action="{{ route('like.destroy', ['post' => $post->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    いいねを取り消す
+                </button>
+            </form>
+        @else
+            <!-- いいねをするボタン -->
+            <form action="{{ route('like.store', ['post' => $post->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    いいね
+                </button>
+            </form>
+        @endif
+    </div>
+    <!-- いいねの数を表示 -->
+        <p>{{ $post->likes->count() }} 件のいいね</p>
     <!--右側エリア[[END]-->
      <!-- コメントフォーム -->
+     
         <h2>コメントを追加</h2>
         <form action="{{ route('comment.store', ['post' => $post->id]) }}" method="POST">
             @csrf

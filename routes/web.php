@@ -7,8 +7,14 @@ use App\Http\Controllers\PostController; //Add
 use App\Models\Post; //Add
 use App\Http\Controllers\CommentController;
 use App\Models\Comment; //Add
+use App\Http\Controllers\LikeController;
 
 
+// いいねする
+Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('like.store');
+
+// いいねを取り消す
+Route::post('/post/{post}/unlike', [LikeController::class, 'destroy'])->name('like.destroy');
 
 // コメント投稿
 Route::post('/post/{post}/comments', [CommentController::class, 'store'])->name('comment.store');

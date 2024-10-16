@@ -26,6 +26,7 @@
                   </a>
                  <!-- コメント数を表示 -->
                 <p>{{ $post->comments->count() }} 件のコメント</p>
+                <p>{{ $post->likes->count() }}件のいいね</p>
                 </x-collection>
             @endforeach
         @endif
