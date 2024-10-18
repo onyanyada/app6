@@ -14,8 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['comments', 'likes'])->where('is_public', true)->orderBy('created_at', 'asc')->get();
-
+        $posts = Post::with(['comments', 'likes', 'category'])->where('is_public', true)->orderBy('created_at', 'asc')->get();
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -23,7 +22,7 @@ class PostController extends Controller
 
     public function dashboard()
     {
-        $posts = Post::with(['comments', 'likes'])->where('user_id', Auth::user()->id)
+        $posts = Post::with(['comments', 'likes', 'category'])->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'asc')->get();
         return view('dashboard', [
             'posts' => $posts
@@ -92,8 +91,12 @@ class PostController extends Controller
      */
     public function edit($post_id)
     {
-        $posts = Post::where('user_id', Auth::user()->id)->find($post_id);
-        return view('posts.edit', ['post' => $posts]);
+        $posts = Post::with(['category'])->where('user_id', Auth::user()->id)->find($post_id);
+        $categories = Category::all();
+        return view('posts.edit', [
+            'post' => $posts,
+            'categories' => $categories
+        ]);
     }
 
     /**

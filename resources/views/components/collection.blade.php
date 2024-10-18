@@ -16,6 +16,7 @@
           @endif
           {{-- 値段 --}}
           <p>{{ $post->price }}円</p>
+          <p>カテゴリ：{{ $post->category->name }}</p>
       </a>
       @if (count($post->comments) > 0)
       <p>{{ $post->comments->count() }} 件のコメント</p>

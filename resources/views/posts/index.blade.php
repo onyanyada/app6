@@ -24,7 +24,7 @@
                   <a href="{{ route('post_show', ['post' => $post->id]) }}">
                     {{ $post->title }}
                   </a>
-                 <!-- コメント数を表示 -->
+                <p>カテゴリ：{{ $post->category->name}}</p>
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
                 </x-homecollection>

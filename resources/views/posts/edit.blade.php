@@ -74,8 +74,21 @@
                       </label>
                       <input name="price" value="{{$post->price}}" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="">
                     </div>
-                  </div>
                   <!-- カラム６ -->
+                    <div class="w-full md:w-1/1 px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        カテゴリ
+                      </label>
+                      <select name="category_id" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        {{-- @if (count($categories) > 0) --}}
+                          @foreach ($categories as $category)
+                            <option value="{{$category->id}}" @if ($post->category->id == $category->id) selected @endif>{{$category->name}}</option>
+                          @endforeach
+                        {{-- @endif --}}
+                      </select>
+                    </div>
+                  </div>
+                  <!-- カラム７ -->
                   <div class="flex flex-col">
                       <div class="text-gray-700 text-center px-4 py-2 m-2">
                              <x-button class="bg-blue-500 rounded-lg">更新</x-button>
