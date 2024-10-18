@@ -16,9 +16,11 @@ class PurchaseController extends Controller
     public function index()
     {
         // 購入履歴を表示する
-        $purchases = Auth::user()->purchases;
-
-        return view('purchases.index', compact('purchases'));
+        $purchases = Purchase::where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'asc')->get();
+        return view('purchases.index', [
+            'purchases' => $purchases
+        ]);
     }
 
     /**
@@ -34,11 +36,20 @@ class PurchaseController extends Controller
      */
     public function store(Request $request, Post $post)
     {
-        // 購入処理を行う（例: ログインユーザーが記事を購入）
+        // 購入済みかどうか確認
+        $alreadyPurchased = Purchase::where('user_id', Auth::id())
+            ->where('post_id', $post->id)
+            ->exists();
+
+        if ($alreadyPurchased) {
+            return redirect()->back()->with('error', 'この記事は既に購入済みです。');
+        }
+
+        // 購入処理
         $purchase = Purchase::create([
             'user_id' => Auth::id(),
             'post_id' => $post->id,
-            'amount' => $post->price, // 記事の金額に基づくと仮定
+            'amount' => $post->price,
         ]);
 
         return redirect()->back()->with('success', '記事を購入しました！');

@@ -12,6 +12,8 @@ use App\Http\Controllers\PurchaseController;
 
 // 購入
 Route::post('/posts/{post}', [PurchaseController::class, 'store'])->name('purchase.store');
+
+// 購入履歴
 Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchase.index');
 
 
