@@ -31,6 +31,19 @@
                 </div>
 
     </div>
+    <!-- 購入ボタン -->
+    {{-- @if (Auth::check() && !$post->purchases->contains('user_id', Auth::id())) --}}
+        <!-- ログインしているかつ、まだ購入していない場合のみ表示 -->
+        <form action="{{ route('purchase.store', $post) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">この記事を購入する</button>
+        </form>
+    {{-- @else
+        <p>この記事は既に購入済みです。</p>
+    @endif --}}
+
+    
+
     <!-- いいねの表示 -->
     <div>
         @if($post->likes->where('user_id', Auth::id())->count() > 0)

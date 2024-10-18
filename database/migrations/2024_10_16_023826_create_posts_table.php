@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->boolean('is_public')->default(true);
+            $table->boolean('is_paid')->default(false); // 有料記事かどうかのフラグ
+            $table->decimal('price', 8, 2)->nullable(); // 記事の価格 (有料の場合のみ)
             $table->timestamps();
         });
     }

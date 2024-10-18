@@ -20,4 +20,10 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    // 購入のリレーション
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }

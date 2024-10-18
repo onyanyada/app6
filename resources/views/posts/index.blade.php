@@ -20,7 +20,7 @@
          <!-- 現在の本 -->
         @if (count($posts) > 0)
             @foreach ($posts as $post)
-                <x-homecollection id="{{ $post->id }}">
+                <x-homecollection :post="$post" id="{{ $post->id }}">
                   <a href="{{ route('post_show', ['post' => $post->id]) }}">
                     {{ $post->title }}
                   </a>

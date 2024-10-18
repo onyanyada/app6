@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['comments', 'likes'])->where('is_public', true)->orderBy('created_at', 'asc')->get();
-        return view('posts', [
+        return view('posts.index', [
             'posts' => $posts
         ]);
     }
@@ -22,7 +22,6 @@ class PostController extends Controller
     public function dashboard()
     {
         $posts = Post::with(['comments', 'likes'])->where('user_id', Auth::user()->id)
-            ->where('is_public', false)
             ->orderBy('created_at', 'asc')->get();
         return view('dashboard', [
             'posts' => $posts
@@ -34,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('postscreate');
+        return view('posts.create');
     }
 
     /**
@@ -46,7 +45,9 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:1|max:255',
             'body' => 'required | min:1 | max:255',
-            'is_public' => 'required | max:6'
+            'is_public' => 'required | max:6',
+            'is_paid' => 'required | max:6',
+            'price' => 'required | min:1 | max:8'
         ]);
 
         //バリデーション:エラー 
@@ -63,6 +64,8 @@ class PostController extends Controller
         $posts->title   = $request->title;
         $posts->body = $request->body;
         $posts->is_public = $request->is_public;
+        $posts->is_paid = $request->is_paid;
+        $posts->price   = $request->price;
         $posts->save();
         return redirect('/');
     }
@@ -72,7 +75,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('postsshow', [
+        return view('posts.show', [
             'post' => $post
         ]);
     }
@@ -83,7 +86,7 @@ class PostController extends Controller
     public function edit($post_id)
     {
         $posts = Post::where('user_id', Auth::user()->id)->find($post_id);
-        return view('postsedit', ['post' => $posts]);
+        return view('posts.edit', ['post' => $posts]);
     }
 
     /**
@@ -96,21 +99,24 @@ class PostController extends Controller
             'id' => 'required',
             'title' => 'required|min:1|max:255',
             'body' => 'required | min:1 | max:255',
-            'is_public' => 'required | max:6'
+            'is_public' => 'required | max:6',
+            'is_paid' => 'required | max:6',
+            'price' => 'required | min:1 | max:8'
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
-            return redirect('/postsedit/' . $request->id)
+            return redirect('/posts/edit/' . $request->id)
                 ->withInput()
                 ->withErrors($validator);
         }
 
         //データ更新
-        $posts = Post::find($request->id);
         $posts = Post::where('user_id', Auth::user()->id)->find($request->id);
         $posts->title   = $request->title;
         $posts->body = $request->body;
         $posts->is_public = $request->is_public;
+        $posts->is_paid = $request->is_paid;
+        $posts->price   = $request->price;
         $posts->save();
         return redirect('/');
     }

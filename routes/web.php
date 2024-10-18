@@ -8,6 +8,11 @@ use App\Models\Post; //Add
 use App\Http\Controllers\CommentController;
 use App\Models\Comment; //Add
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PurchaseController;
+
+// 購入
+Route::post('/posts/{post}', [PurchaseController::class, 'store'])->name('purchase.store');
+Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchase.index');
 
 
 // いいねする
@@ -37,17 +42,17 @@ Route::group(
         Route::post('/posts', [PostController::class, "store"])->name('post_store');
 
         //本：詳細
-        Route::get('/postsshow/{post}', [PostController::class, "show"])->name('post_show');
+        Route::get('/posts/{post}', [PostController::class, "show"])->name('post_show');
 
         //本：削除 
         Route::delete('/post/{post}', [PostController::class, "destroy"])->name('post_destroy');
 
         //本：更新画面
-        Route::post('/postsedit/{post}', [PostController::class, "edit"])->name('post_edit'); //通常
-        Route::get('/postsedit/{post}', [PostController::class, "edit"])->name('edit');      //Validationエラーありの場合
+        Route::post('/posts/edit/{post}', [PostController::class, "edit"])->name('post_edit'); //通常
+        Route::get('/posts/edit/{post}', [PostController::class, "edit"])->name('edit');      //Validationエラーありの場合
 
         //本：更新画面
-        Route::post('/posts/update', [PostController::class, "update"])->name('post_update');
+        Route::post('/posts/update/{post}', [PostController::class, "update"])->name('post_update');
     }
 );
 

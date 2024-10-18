@@ -19,13 +19,8 @@
          <!-- 現在の本 -->
         @if (count($posts) > 0)
             @foreach ($posts as $post)
-                <x-collection id="{{ $post->id }}">
-                    <a href="{{ route('post_show', ['post' => $post->id]) }}">
-                        {{ $post->title }}
-                    </a>
-                    @if (count($post->comments) > 0)
-                    <p>{{ $post->comments->count() }} 件のコメント</p>
-                    @endif
+                <x-collection :post="$post" id="{{ $post->id }}">
+
                 </x-collection>
             @endforeach
         @endif

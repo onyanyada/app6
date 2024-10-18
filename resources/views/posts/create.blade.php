@@ -33,12 +33,31 @@
                         公開
                       </label>
                       <select name="is_public" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="1">公開</option>
                         <option value="0">非公開</option>
+                        <option value="1">公開</option>
+                        
                     </select>
                     </div>
+                    <!-- カラム４ -->
+                    <div class="w-full md:w-1/1 px-3 mb-2 md:mb-0">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        有料or無料
+                      </label>
+                      <select name="is_paid" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="0">無料記事にする</option>
+                        <option value="1">有料記事にする</option>
+                        
+                    </select>
+                    </div>
+                    <!-- カラム５ -->
+                    <div class="w-full md:w-1/1 px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        料金
+                      </label>
+                      <input name="price" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="">
+                    </div>
                   </div>
-                  <!-- カラム５ -->
+                  <!-- カラム６ -->
                   <div class="flex flex-col">
                       <div class="text-gray-700 text-center px-4 py-2 m-2">
                              <x-button class="bg-blue-500 rounded-lg">送信</x-button>

@@ -28,7 +28,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('posts/update') }}" method="POST" class="w-full max-w-lg">
+            <form action="{{ url('posts/update/'.$post->id) }}" method="POST" class="w-full max-w-lg">
                 @csrf
                 
                   <div class="flex flex-col px-2 py-2">
@@ -52,12 +52,30 @@
                         公開
                       </label>
                       <select name="is_public" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="1">公開</option>
-                        <option value="0">非公開</option>
+                        <option value="0" @if( $post->is_public ==0) selected  @endif>非公開</option>
+                        <option value="1" @if( $post->is_public ==1) selected  @endif>公開</option>
                     </select>
                     </div>
+                    <!-- カラム４ -->
+                    <div class="w-full md:w-1/1 px-3 mb-2 md:mb-0">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        有料or無料
+                      </label>
+                      <select name="is_paid" id="is_paid" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="0" @if( $post->is_public ==0) selected  @endif>無料記事にする</option>
+                        <option value="1" @if( $post->is_public ==0) selected  @endif>有料記事にする</option>
+                        
+                    </select>
+                    </div>
+                    <!-- カラム５ -->
+                    <div class="w-full md:w-1/1 px-3" id="priceInput">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        料金(円)
+                      </label>
+                      <input name="price" value="{{$post->price}}" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="">
+                    </div>
                   </div>
-                  <!-- カラム５ -->
+                  <!-- カラム６ -->
                   <div class="flex flex-col">
                       <div class="text-gray-700 text-center px-4 py-2 m-2">
                              <x-button class="bg-blue-500 rounded-lg">更新</x-button>
