@@ -49,15 +49,7 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Purchase $purchase, Post $post)
-    {
-        // 購入情報も一緒に取得
-        $post->load('purchases');
-
-        return view('posts.show', [
-            'post' => $post
-        ]);
-    }
+    public function show(Purchase $purchase, Post $post) {}
 
     /**
      * Show the form for editing the specified resource.

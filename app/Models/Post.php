@@ -26,4 +26,10 @@ class Post extends Model
     {
         return $this->hasMany(Purchase::class);
     }
+
+    // カテゴリのリレーション
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -9,6 +9,31 @@ use App\Http\Controllers\CommentController;
 use App\Models\Comment; //Add
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\CategoryController;
+
+//カテゴリー一覧表示
+Route::get('/categories', [CategoryController::class, 'index'])->name('category_index');
+
+// カテゴリー：作成ボタン 
+Route::get('/categories/create', [CategoryController::class, "create"])->name('category_create');
+
+// カテゴリー：追加 
+Route::post('/categories', [CategoryController::class, "store"])->name('category_store');
+
+// カテゴリー：詳細
+// Route::get('/posts/{post}', [PostController::class, "show"])->name('post_show');
+
+// カテゴリー：削除 
+Route::delete('/category/{category}', [CategoryController::class, "destroy"])->name('category_destroy');
+
+// カテゴリー：更新画面
+Route::post('/categories/edit/{category}', [CategoryController::class, "edit"])->name('category_edit'); //通常
+Route::get('/categories/edit/{category}', [CategoryController::class, "edit"])->name('edit');      //Validationエラーありの場合
+
+// カテゴリー：更新画面
+Route::post('/categories/update/{category}', [CategoryController::class, "update"])->name('category_update');
+
+
 
 // 購入
 Route::post('/posts/{post}', [PurchaseController::class, 'store'])->name('purchase.store');
