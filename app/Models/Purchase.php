@@ -20,11 +20,4 @@ class Purchase extends Model
     {
         return $this->belongsTo(Post::class);
     }
-
-    // フィールドの一括代入を許可
-    protected $fillable = [
-        'user_id',
-        'post_id',
-        'amount',
-    ];
 }

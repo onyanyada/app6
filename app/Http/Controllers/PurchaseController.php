@@ -36,23 +36,14 @@ class PurchaseController extends Controller
      */
     public function store(Request $request, Post $post)
     {
-        // 購入済みかどうか確認
-        $alreadyPurchased = Purchase::where('user_id', Auth::id())
-            ->where('post_id', $post->id)
-            ->exists();
-
-        if ($alreadyPurchased) {
-            return redirect()->back()->with('error', 'この記事は既に購入済みです。');
-        }
 
         // 購入処理
-        $purchase = Purchase::create([
-            'user_id' => Auth::id(),
-            'post_id' => $post->id,
-            'amount' => $post->price,
-        ]);
-
-        return redirect()->back()->with('success', '記事を購入しました！');
+        $purchase = new Purchase;
+        $purchase->user_id  = Auth::user()->id;
+        $purchase->post_id   = $post->id;
+        $purchase->amount = $post->price;
+        $purchase->save();
+        return redirect('/');
     }
 
     /**

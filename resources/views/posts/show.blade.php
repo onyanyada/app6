@@ -32,6 +32,7 @@
 
     </div>
     <!-- 購入ボタン -->
+    {{-- Purchaseモデルに現在ログインしているユーザーのIDが含まれているか --}}
     @if (Auth::check() && !$post->purchases->contains('user_id', Auth::id()))
         <!-- ログインしているかつ、まだ購入していない場合のみ表示 -->
         <form action="{{ route('purchase.store', $post) }}" method="POST">
