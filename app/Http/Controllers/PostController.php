@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator; // Validatorのインポート
 use Illuminate\Support\Facades\Auth; // Authのインポート
@@ -14,6 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['comments', 'likes'])->where('is_public', true)->orderBy('created_at', 'asc')->get();
+
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -33,7 +35,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -47,7 +52,8 @@ class PostController extends Controller
             'body' => 'required | min:1 | max:255',
             'is_public' => 'required | max:6',
             'is_paid' => 'required | max:6',
-            'price' => 'required | min:1 | max:8'
+            'price' => 'required | min:1 | max:8',
+            'category_id' => 'required'
         ]);
 
         //バリデーション:エラー 
@@ -61,6 +67,7 @@ class PostController extends Controller
         // Eloquentモデル
         $posts = new Post;
         $posts->user_id  = Auth::user()->id;
+        $posts->category_id   = $request->category_id;
         $posts->title   = $request->title;
         $posts->body = $request->body;
         $posts->is_public = $request->is_public;
