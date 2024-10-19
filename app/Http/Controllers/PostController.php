@@ -14,16 +14,29 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with(['comments', 'likes', 'category'])->where('is_public', true)->orderBy('created_at', 'asc')->get();
+        $query = Post::with(['comments', 'likes', 'category'])
+            ->where('is_public', true);
         $categories = Category::all(); // 全てのカテゴリを取得
 
         // カテゴリが選択されている場合
         if ($request->has('categories') && !empty($request->input('categories'))) {
             $selectedCategories = $request->input('categories');
-            // 選択されたカテゴリに一致する投稿を取得
-            $posts = $posts->whereIn('category_id', $selectedCategories);
+            // 選択されたカテゴリに一致する投稿をフィルタ
+            $query->whereIn('category_id', $selectedCategories);
         }
 
+        // 検索ワードが入力されている場合
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $search = $request->input('search');
+            // タイトルまたは本文に検索ワードが含まれる投稿をフィルタ
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%');
+            });
+        }
+
+        // 最終的な投稿を取得
+        $posts = $query->orderBy('created_at', 'desc')->get();
 
 
         return view('posts.index', [

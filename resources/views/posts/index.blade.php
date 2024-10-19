@@ -11,10 +11,11 @@
         <!-- バリデーションエラーの表示に使用-->
     
     <!--全エリア[START]-->
-    <div class="bg-gray-100">
+<div class="bg-gray-100">
         <div class="text-gray-700 text-left px-4 py-2 m-2">
-            <h3>カテゴリ検索</h3>
-            <form action="{{ route('post_index') }}" method="GET" class="">
+            <h3>カテゴリ・キーワード検索</h3>
+            <form action="{{ route('post_index') }}" method="GET">
+                <!-- カテゴリ検索 -->
                 <select name="categories[]" class="form-control" multiple>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" 
@@ -23,7 +24,12 @@
                         </option>
                     @endforeach
                 </select>
-                <x-button class="bg-blue-500 rounded-lg h-7 w-13">検索</x-button>
+
+                <!-- キーワード検索 -->
+                <input type="text" name="search" class="form-control mt-2" placeholder="キーワードを入力" value="{{ request('search') }}">
+
+                <!-- 検索ボタン -->
+                <x-button class="bg-blue-500 rounded-lg h-7 w-13 mt-2">検索</x-button>
             </form>
         </div>
        
