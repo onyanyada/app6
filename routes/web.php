@@ -10,6 +10,15 @@ use App\Models\Comment; //Add
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BioController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/bio', [BioController::class, 'index'])->name('bio.index');
+    Route::get('/bio/create', [BioController::class, 'create'])->name('bio.create');
+    Route::post('/bio', [BioController::class, 'store'])->name('bio.store');
+    Route::get('/bio/edit', [BioController::class, 'edit'])->name('bio.edit');
+    Route::put('/bio', [BioController::class, 'update'])->name('bio.update');
+});
 
 //カテゴリー一覧表示
 Route::get('/categories', [CategoryController::class, 'index'])->name('category_index');
