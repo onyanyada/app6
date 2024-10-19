@@ -28,8 +28,11 @@
                   {{ $post->created_at }}
                   更新日時
                   {{ $post->updated_at }}
-                  作成者
-                  {{ $post->user->bio->name }}
+               @if($post->user && $post->user->bio)
+                <p>投稿者：{{ $post->user->bio->name}}</p>
+                @else
+                    <p>投稿者：{{ $post->user->name }}</p>
+                @endif
                 </div>
 
     </div>
