@@ -6,6 +6,7 @@
     <!--ヘッダー[END]-->
     <div>
         @if ($bio)
+            {{ $bio->name }}
             {{ $bio->body }}
             <x-button><a href="{{ route('bio.edit')}}">編集する</a></x-button>
         @else

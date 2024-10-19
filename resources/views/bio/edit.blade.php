@@ -15,7 +15,11 @@
         <form action="{{ route('bio.update') }}" method="POST">
             @csrf
             @method('PUT')
-            <div class="form-group">
+            <div>
+                <label for="name">ニックネーム</label>
+                <input type="text" name="name" value="{{ $bio->name }}">
+            </div>
+            <div>
                 <label for="body">自己紹介</label>
                 <textarea name="body" id="body" class="form-control" rows="5" required>{{ $bio->body }}</textarea>
             </div>

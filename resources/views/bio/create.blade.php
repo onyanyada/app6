@@ -18,7 +18,11 @@
 
         <form action="{{ route('bio.store') }}" method="POST">
             @csrf
-            <div class="form-group">
+            <div>
+                <label for="name">ニックネーム</label>
+                <input type="text" name="name">{{ old('name') }}
+            </div>
+            <div>
                 <label for="body">自己紹介</label>
                 <textarea name="body" id="body" class="form-control" rows="5" required>{{ old('body') }}</textarea>
             </div>

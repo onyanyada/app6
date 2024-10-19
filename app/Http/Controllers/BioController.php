@@ -50,6 +50,7 @@ class BioController extends Controller
 
         //バリデーション
         $validator = Validator::make($request->all(), [
+            'name' => 'required | min:1 | max:255',
             'body' => 'required | min:1 | max:255',
         ]);
 
@@ -64,6 +65,7 @@ class BioController extends Controller
         // Eloquentモデル
         $bio = new Bio;
         $bio->user_id  = Auth::user()->id;
+        $bio->name = $request->name;
         $bio->body = $request->body;
         $bio->save();
         return redirect('/bio');
@@ -98,6 +100,7 @@ class BioController extends Controller
     {
         //バリデーション
         $validator = Validator::make($request->all(), [
+            'name' => 'required | min:1 | max:255',
             'body' => 'required | min:1 | max:255',
         ]);
 
@@ -112,6 +115,7 @@ class BioController extends Controller
         // Eloquentモデル
         $user = Auth::user();
         $bio = $user->bio;
+        $bio->name = $request->name;
         $bio->body = $request->body;
         $bio->save();
         return redirect('/bio');
