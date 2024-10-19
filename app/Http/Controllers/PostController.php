@@ -77,7 +77,7 @@ class PostController extends Controller
             'body' => 'required | min:1 | max:255',
             'is_public' => 'required | max:6',
             'is_paid' => 'required | max:6',
-            'price' => 'required | min:1 | max:8',
+            'price' => 'nullable|min:1 | max:8',
             'category_id' => 'required'
         ]);
 
@@ -140,7 +140,8 @@ class PostController extends Controller
             'body' => 'required | min:1 | max:255',
             'is_public' => 'required | max:6',
             'is_paid' => 'required | max:6',
-            'price' => 'required | min:1 | max:8'
+            'price' => 'nullable|min:1 | max:8',
+            'category_id' => 'required'
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
