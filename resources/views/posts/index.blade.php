@@ -14,7 +14,7 @@
 <div class="bg-gray-100">
         <div class="text-gray-700 text-left px-4 py-2 m-2">
             <h3>カテゴリ・キーワード検索</h3>
-            <form action="{{ route('post_index') }}" method="GET">
+            <form action="{{ route('post_index') }}" method="GET" class="">
                 <!-- カテゴリ検索 -->
                 <select name="categories[]" class="form-control" multiple>
                     @foreach($categories as $category)
