@@ -46,7 +46,11 @@
                 <p>カテゴリ：{{ $post->category->name}}</p>
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
+                @if($post->user && $post->user->bio)
                 <p>投稿者：{{ $post->user->bio->name}}</p>
+                @else
+                    <p>投稿者：{{ $post->user->name }}</p>
+                @endif
                 </x-homecollection>
             @endforeach
         @endif
