@@ -46,6 +46,7 @@
                 <p>カテゴリ：{{ $post->category->name}}</p>
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
+                <p>投稿者：{{ $post->user->bio->name}}</p>
                 </x-homecollection>
             @endforeach
         @endif

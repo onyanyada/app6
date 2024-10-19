@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Post::with(['comments', 'likes', 'category'])
+        $query = Post::with(['comments', 'likes', 'category', 'user.bio'])
             ->where('is_public', true);
         $categories = Category::all(); // 全てのカテゴリを取得
 
@@ -107,6 +107,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // 指定された$postにリレーションをロードする（Eager Loading）
+        //Post::with()はクエリビルダーを使って複数のPostをクエリするとき
+        $post->load(['comments', 'likes', 'category', 'user']);
         return view('posts.show', [
             'post' => $post
         ]);

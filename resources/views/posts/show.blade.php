@@ -28,6 +28,8 @@
                   {{ $post->created_at }}
                   更新日時
                   {{ $post->updated_at }}
+                  作成者
+                  {{ $post->user->bio->name }}
                 </div>
 
     </div>
