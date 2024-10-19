@@ -11,8 +11,21 @@
         <!-- バリデーションエラーの表示に使用-->
     
     <!--全エリア[START]-->
-    <div class="flex bg-gray-100">
-
+    <div class="bg-gray-100">
+        <div class="text-gray-700 text-left px-4 py-2 m-2">
+            <h3>カテゴリ検索</h3>
+            <form action="{{ route('post_index') }}" method="GET" class="">
+                <select name="categories[]" class="form-control" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            {{ in_array($category->id, $selectedCategories ?? []) ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-button class="bg-blue-500 rounded-lg h-7 w-13">検索</x-button>
+            </form>
+        </div>
        
     
     <!--右側エリア[START]-->
