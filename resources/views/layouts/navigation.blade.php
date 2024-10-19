@@ -21,9 +21,11 @@
                     <x-nav-link :href="route('post_create')" :active="request()->routeIs('post_create')">
                         {{ __('投稿を作成') }}
                     </x-nav-link>
+                    @if (Auth::check() && Auth::user()->is_admin=== 1)
                     <x-nav-link :href="route('category_index')" :active="request()->routeIs('category_index')">
                         {{ __('カテゴリ') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
