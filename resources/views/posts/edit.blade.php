@@ -62,8 +62,8 @@
                         有料or無料
                       </label>
                       <select name="is_paid" id="is_paid" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="0" @if( $post->is_public ==0) selected  @endif>無料記事にする</option>
-                        <option value="1" @if( $post->is_public ==0) selected  @endif>有料記事にする</option>
+                        <option value="0" @if( $post->is_public ==0) selected  @endif>無料記事</option>
+                        <option value="1" @if( $post->is_public ==0) selected  @endif>有料記事</option>
                         
                     </select>
                     </div>
