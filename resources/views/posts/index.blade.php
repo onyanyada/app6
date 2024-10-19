@@ -33,7 +33,24 @@
             </form>
         </div>
        
-    
+      <!-- ソートボタン -->
+        <div class="flex justify-start m-2">
+            <a href="{{ route('post_index', array_merge(request()->query(), ['sort' => 'likes'])) }}">
+                <button class="bg-{{ request('sort') == 'likes' ? 'blue' : 'gray' }}-500 rounded-lg m-2 p-2 text-white">
+                    いいね順
+                </button>
+            </a>
+            <a href="{{ route('post_index', array_merge(request()->query(), ['sort' => 'newest'])) }}">
+                <button class="bg-{{ request('sort') == 'newest' ? 'blue' : 'gray' }}-500 rounded-lg m-2 p-2 text-white">
+                    最新
+                </button>
+            </a>
+            <a href="{{ route('post_index', array_merge(request()->query(), ['sort' => 'oldest'])) }}">
+                <button class="bg-{{ request('sort') == 'oldest' ? 'blue' : 'gray' }}-500 rounded-lg m-2 p-2 text-white">
+                    古い順
+                </button>
+            </a>
+        </div>
     <!--右側エリア[START]-->
     <div class="grid grid-cols-2 gap-4 text-gray-700 text-left px-4 py-2 m-2">
          <!-- 現在の本 -->

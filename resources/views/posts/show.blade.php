@@ -16,7 +16,7 @@
        
     
     <!--右側エリア[START]-->
-    <div class="flex-1 text-gray-700 text-left bg-red-100 px-4 py-2 m-2">
+    <div class="flex-1 text-gray-700 text-left bg-white px-4 py-2 m-2">
          <!-- 現在の本 -->
 
                 <div id="{{ $post->id }}">
@@ -42,7 +42,7 @@
         <!-- ログインしているかつ、まだ購入していない場合のみ表示 -->
         <form action="{{ route('purchase.store', $post) }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-primary">この記事を購入する</button>
+            <x-button type="submit" class="btn btn-primary">この記事を購入する</x-button>
         </form>
     @else
         <p>この記事は既に購入済みです。</p>

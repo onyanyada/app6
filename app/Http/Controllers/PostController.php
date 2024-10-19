@@ -35,8 +35,22 @@ class PostController extends Controller
             });
         }
 
+
+        // ソート条件に基づいて並び替え
+        switch ($request->input('sort')) {
+            case 'likes':
+                $query->withCount('likes')->orderBy('likes_count', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc'); // デフォルトは最新順
+                break;
+        }
+
         // 最終的な投稿を取得
-        $posts = $query->orderBy('created_at', 'desc')->get();
+        $posts = $query->get();
 
 
         return view('posts.index', [
