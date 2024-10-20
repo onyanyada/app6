@@ -76,14 +76,13 @@
                         カテゴリ
                       </label>
                       <select name="category_id" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        {{-- @if (count($categories) > 0) --}}
+                        @if (count($categories) > 0)
                           @foreach ($categories as $category)
-                            {{-- <option value="{{$category->id}}"> --}}
                             <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                               {{$category->name}}
                             </option>
                           @endforeach
-                        {{-- @endif --}}
+                        @endif
                       </select>
                        @error('category_id')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
