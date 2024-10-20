@@ -16,7 +16,7 @@
             <h3>カテゴリ・キーワード検索</h3>
             <form action="{{ route('post_index') }}" method="GET" class="">
                 <!-- カテゴリ検索 -->
-                <select name="categories[]" class="form-control" multiple>
+                <select name="categories[]" class="form-control h-9 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" multiple>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" 
                             {{ in_array($category->id, $selectedCategories ?? []) ? 'selected' : '' }}>
@@ -26,7 +26,7 @@
                 </select>
 
                 <!-- キーワード検索 -->
-                <input type="text" name="search" class="form-control mt-2" placeholder="キーワードを入力" value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control" placeholder="キーワードを入力" value="{{ request('search') }}">
 
                 <!-- 検索ボタン -->
                 <x-button class="bg-blue-500 rounded-lg h-7 w-13 mt-2">検索</x-button>
