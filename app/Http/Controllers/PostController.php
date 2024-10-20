@@ -97,7 +97,7 @@ class PostController extends Controller
 
         //バリデーション:エラー 
         if ($validator->fails()) {
-            return redirect('/')
+            return redirect('/posts/create')
                 ->withInput()
                 ->withErrors($validator);
         }

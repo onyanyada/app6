@@ -18,14 +18,20 @@
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                        タイトル
                       </label>
-                      <input name="title" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">
-                    </div>
+                       <input name="title" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="" value="{{ old('title') }}">
+                         @error('title')
+                          <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
+                      </div>
                     <!-- カラム２ -->
                     <div class="w-full md:w-1/1 px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         内容
                       </label>
-                      <input name="body" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="">
+                      <input name="body" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="" value="{{ old('body') }}">
+                      @error('body')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                      @enderror
                     </div>
                     <!-- カラム３ -->
                     <div class="w-full md:w-1/1 px-3 mb-2 md:mb-0">
@@ -33,27 +39,35 @@
                         公開
                       </label>
                       <select name="is_public" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="0">非公開</option>
-                        <option value="1">公開</option>
-                        
+                        <option value="0" {{ old('is_public') == '0' ? 'selected' : '' }}>非公開</option>
+                        <option value="1" {{ old('is_public') == '1' ? 'selected' : '' }}>公開</option>
                     </select>
+                    @error('is_public')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                     </div>
                     <!-- カラム４ -->
                     <div class="w-full md:w-1/1 px-3 mb-2 md:mb-0">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         有料or無料
                       </label>
-                      <select name="is_paid" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="0">無料記事にする</option>
-                        <option value="1">有料記事にする</option>                     
+                      <select name="is_paid" id="is_public" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"> 
+                        <option value="0" {{ old('is_paid') == '0' ? 'selected' : '' }}>無料記事にする</option>
+                        <option value="1" {{ old('is_paid') == '1' ? 'selected' : '' }}>有料記事にする</option>
                     </select>
+                    @error('is_paid')
+                      <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
                     </div>
                     <!-- カラム５ -->
                     <div class="w-full md:w-1/1 px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         料金
                       </label>
-                      <input name="price" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="">
+                      <input name="price" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" placeholder="" value="{{ old('price') }}">
+                      @error('price')
+                          <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                      @enderror
                     </div>
                   
                   <!-- カラム６ -->
@@ -64,10 +78,16 @@
                       <select name="category_id" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         {{-- @if (count($categories) > 0) --}}
                           @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            {{-- <option value="{{$category->id}}"> --}}
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                              {{$category->name}}
+                            </option>
                           @endforeach
                         {{-- @endif --}}
                       </select>
+                       @error('category_id')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                       @enderror
                     </div>
                   </div>
                   <!-- カラム７ -->
