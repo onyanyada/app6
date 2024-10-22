@@ -47,10 +47,11 @@
     {{-- Purchaseモデルに現在ログインしているユーザーのIDが含まれているか --}}
     @if (Auth::check() && !$post->purchases->contains('user_id', Auth::id()))
         <!-- ログインしているかつ、まだ購入していない場合のみ表示 -->
-        <form action="{{ route('purchase.store', $post) }}" method="POST">
-            @csrf
-            <x-button type="submit" class="btn btn-primary">この記事を購入する</x-button>
-        </form>
+        <button>
+            <a href="{{ route('purchase.show', $post) }}" class="btn btn-primary">
+                購入ページへ進む
+            </a>
+        </button>
     @else
         <p>この記事は既に購入済みです。</p>
     @endif

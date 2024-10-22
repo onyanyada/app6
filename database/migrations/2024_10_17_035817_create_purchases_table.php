@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // 購入者のユーザーID
             $table->foreignId('post_id')->constrained()->onDelete('cascade'); // 購入した記事のID
             $table->decimal('amount', 8, 2); // 購入金額
+            $table->foreignId('payment_method_id')->nullable()->constrained('payment_methods')->onDelete('set null'); // 決済手段ID
             $table->timestamps();
         });
     }

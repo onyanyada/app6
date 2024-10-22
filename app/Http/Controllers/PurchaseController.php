@@ -36,20 +36,31 @@ class PurchaseController extends Controller
      */
     public function store(Request $request, Post $post)
     {
+        // バリデーション（決済方法が選択されたかを確認）
+        $request->validate([
+            'payment_method' => 'required|string',
+        ]);
 
         // 購入処理
         $purchase = new Purchase;
         $purchase->user_id  = Auth::user()->id;
         $purchase->post_id   = $post->id;
         $purchase->amount = $post->price;
+        $purchase->payment_method_id = $request->payment_method;
         $purchase->save();
-        return redirect('/');
+        return redirect('/')->with('success', '購入が完了しました！');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Purchase $purchase, Post $post) {}
+    public function show(Purchase $purchase, Post $post)
+    {
+        // 購入ページ（決済方法選択ページ）を表示
+        return view('purchases.show', [
+            'post' => $post
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.

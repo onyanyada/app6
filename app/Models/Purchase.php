@@ -20,4 +20,10 @@ class Purchase extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    //決済不法とのリレーション
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }

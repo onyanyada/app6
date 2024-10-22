@@ -43,12 +43,15 @@ Route::get('/categories/edit/{category}', [CategoryController::class, "edit"])->
 Route::post('/categories/update/{category}', [CategoryController::class, "update"])->name('category_update');
 
 
-
-// 購入
-Route::post('/posts/{post}', [PurchaseController::class, 'store'])->name('purchase.store');
-
-// 購入履歴
+// 購入ページ（決済方法選択ページ）
 Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchase.index');
+
+// 購入ページ（決済方法選択ページ）
+Route::get('/posts/{post}/purchase', [PurchaseController::class, 'show'])->name('purchase.show');
+
+// 購入処理（購入を確定する）
+Route::post('/posts/{post}/purchase', [PurchaseController::class, 'store'])->name('purchase.store');
+
 
 
 // いいねする
