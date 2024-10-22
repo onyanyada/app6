@@ -43,4 +43,9 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+    // 画像のリレーション
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

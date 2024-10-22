@@ -65,6 +65,8 @@
                   <a href="{{ route('post_show', ['post' => $post->id]) }}">
                     {{ $post->title }}
                   </a>
+                <p>投稿：{{ $post->created_at}}</p>
+                <p>更新：{{ $post->updated_at}}</p>
                 <p>カテゴリ：{{ $post->category->name}}</p>
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
@@ -79,6 +81,11 @@
                         <span class="bg-gray-200 rounded px-2">{{ $tag->name }}</span>
                     @endforeach
                 </p>
+                @endif
+                @if($post->images)
+                    @foreach($post->images as $image)
+                        <img src="{{ asset($image->img_url) }}" alt="Post Image" style="max-width: 300px;">
+                    @endforeach
                 @endif
                 </x-homecollection>
             @endforeach

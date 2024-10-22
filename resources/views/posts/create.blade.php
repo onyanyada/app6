@@ -10,7 +10,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('posts') }}" method="POST" class="w-full">
+            <form action="{{ url('posts') }}" method="POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                   <div class="flex flex-col px-2 py-2">
                    <!-- カラム１ -->
@@ -98,6 +98,13 @@
                       @error('tags')
                           <p class="text-red-500 text-xs italic">{{ $message }}</p>
                       @enderror
+                  </div>
+                  <!-- 画像 -->
+                  <div class="w-full md:w-1/1 px-3 mb-2 md:mb-0">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                          画像をアップロード
+                      </label>
+                      <input type="file" name="images[]" multiple>
                   </div>
                   <!-- カラム７ -->
                   <div class="flex flex-col">

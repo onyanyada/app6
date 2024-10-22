@@ -40,6 +40,11 @@
                     @endforeach
                 </p>
                 @endif
+                @if($post->images)
+                    @foreach($post->images as $image)
+                        <img src="{{ asset($image->img_url) }}" alt="Post Image" style="max-width: 300px;">
+                    @endforeach
+                @endif
                 </div>
 
     </div>

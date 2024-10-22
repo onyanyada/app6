@@ -8,6 +8,11 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator; // Validatorのインポート
 use Illuminate\Support\Facades\Auth; // Authのインポート
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Storage;
+
+
 class PostController extends Controller
 {
     /**
@@ -95,6 +100,8 @@ class PostController extends Controller
             'price' => 'nullable|min:3 | max:8',
             'category_id' => 'required',
             'tags' => 'nullable|string',  // 文字列として受け取る
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 画像のバリデーション
+
         ]);
 
         //バリデーション:エラー 
@@ -132,6 +139,19 @@ class PostController extends Controller
             }
             // 投稿とタグを関連付ける
             $posts->tags()->sync($tagIds);
+        }
+
+        // 画像の処理
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $imageFile) {
+                $imagePath = $imageFile->store('public/images'); // 画像を保存してパスを取得
+                $imgUrl = str_replace('public/', 'storage/', $imagePath); // 公開URLに変換
+
+                // Imageモデルに保存
+                $posts->images()->create([
+                    'img_url' => $imgUrl,
+                ]);
+            }
         }
 
         return redirect('/');
