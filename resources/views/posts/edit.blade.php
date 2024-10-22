@@ -105,7 +105,17 @@
                        @enderror
                     </div>
                   </div>
-                  <!-- カラム７ -->
+                    <!-- カラム７ -->
+                    <div class="w-full md:w-1/1 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            タグ（カンマ区切りで指定）
+                        </label>
+                        <input name="tags" value="{{ $postTags }}" class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Laravel,PHP,Web開発">
+                        @error('tags')
+                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+                  <!-- カラム８ -->
                   <div class="flex flex-col">
                       <div class="text-gray-700 text-center px-4 py-2 m-2">
                              <x-button class="bg-blue-500 rounded-lg">更新</x-button>

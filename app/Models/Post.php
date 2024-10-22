@@ -38,4 +38,9 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    // タグのリレーション
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

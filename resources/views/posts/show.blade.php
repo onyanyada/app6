@@ -33,6 +33,13 @@
                 @else
                     <p>投稿者：{{ $post->user->name }}</p>
                 @endif
+                @if($post->tags) 
+                <p>タグ:
+                    @foreach($post->tags as $tag)
+                        <span class="bg-gray-200 rounded px-2">{{ $tag->name }}</span>
+                    @endforeach
+                </p>
+                @endif
                 </div>
 
     </div>
