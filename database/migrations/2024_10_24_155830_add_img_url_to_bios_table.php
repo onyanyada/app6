@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bios', function (Blueprint $table) {
-            $table->id();
-            $table->text('name');
-            $table->text('body');
-            $table->string('img_url')->nullable();  // プロフィール画像のURL
-            $table->timestamps();
+        Schema::table('bios', function (Blueprint $table) {
+            $table->string('img_url')->nullable();  // プロフィール画像のURLを追加
+
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bios');
+        Schema::table('bios', function (Blueprint $table) {
+            $table->dropColumn('img_url');  // カラムを元に戻す処理
+        });
     }
 };

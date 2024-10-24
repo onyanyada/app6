@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <form action="{{ route('bio.store') }}" method="POST">
+        <form action="{{ route('bio.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
                 <label for="name">ニックネーム</label>
@@ -25,6 +25,13 @@
             <div>
                 <label for="body">自己紹介</label>
                 <textarea name="body" id="body" class="form-control" rows="5" required>{{ old('body') }}</textarea>
+            </div>
+            <div>
+                <label for="img">プロフィール画像</label>
+                <input id="bio-input" type="file" name="img">
+                <div id="bio-preview" class="mt-2">
+                <!-- プレビュー表示領域 -->
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">作成</button>
         </form>

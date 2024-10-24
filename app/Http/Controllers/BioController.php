@@ -6,6 +6,11 @@ use App\Models\Bio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator; // Validatorのインポート
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Storage;
+
+
 class BioController extends Controller
 {
     /**
@@ -52,6 +57,8 @@ class BioController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required | min:1 | max:255',
             'body' => 'required | min:1 | max:255',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // 画像のバリデーション
+
         ]);
 
         //バリデーション:エラー 
@@ -67,6 +74,33 @@ class BioController extends Controller
         $bio->user_id  = Auth::user()->id;
         $bio->name = $request->name;
         $bio->body = $request->body;
+
+        // 画像ファイルの処理
+        if ($request->hasFile('img')) {
+            //GDドライバ使う
+            $manager = new ImageManager(new Driver());
+            $imageFile = $request->file('img');
+
+            // 画像をIntervention Imageで読み込む
+            $image = $manager->read($imageFile->getRealPath());
+
+            // 画像をリサイズ（例：横幅を300pxに設定、縦横比を維持）
+            $image->scaleDown(width: 300);
+
+            // 圧縮してJPEG形式で保存 (Quality: 70)
+            $compressedImage =
+                $image->toJpeg(70);
+            // 画像の保存パスを生成
+            $filename = uniqid() . '.jpg';
+            $path = 'public/profile_images/' . $filename;
+
+            // $compressedImageをstorageに保存
+            Storage::put($path, $compressedImage);
+
+            // ファイルの相対パス(公開用パス)を取得してimg_urlカラムに保存
+            $bio->img_url = Storage::url($path);
+        }
+
         $bio->save();
         return redirect('/bio');
     }
@@ -102,6 +136,8 @@ class BioController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required | min:1 | max:255',
             'body' => 'required | min:1 | max:255',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // 画像のバリデーション
+
         ]);
 
         //バリデーション:エラー 
@@ -117,6 +153,34 @@ class BioController extends Controller
         $bio = $user->bio;
         $bio->name = $request->name;
         $bio->body = $request->body;
+
+
+        // 画像ファイルの処理
+        if ($request->hasFile('img')) {
+            //GDドライバ使う
+            $manager = new ImageManager(new Driver());
+            $imageFile = $request->file('img');
+
+            // 画像をIntervention Imageで読み込む
+            $image = $manager->read($imageFile->getRealPath());
+
+            // 画像をリサイズ（例：横幅を300pxに設定、縦横比を維持）
+            $image->scaleDown(width: 300);
+
+            // 圧縮してJPEG形式で保存 (Quality: 70)
+            $compressedImage =
+                $image->toJpeg(70);
+            // 画像の保存パスを生成
+            $filename = uniqid() . '.jpg';
+            $path = 'public/profile_images/' . $filename;
+
+            // $compressedImageをstorageに保存
+            Storage::put($path, $compressedImage);
+
+            // ファイルの相対パス(公開用パス)を取得してimg_urlカラムに保存
+            $bio->img_url = Storage::url($path);
+        }
+
         $bio->save();
         return redirect('/bio');
     }
