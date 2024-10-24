@@ -225,6 +225,8 @@ class PostController extends Controller
             'price' => 'nullable|min:3 | max:8',
             'category_id' => 'required',
             'tags' => 'nullable|string', // カンマ区切りのタグを受け取る
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 画像のバリデーション
+
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
@@ -256,6 +258,53 @@ class PostController extends Controller
             // 投稿とタグを同期
             $post->tags()->sync($tagIds);
         }
+        // 画像の削除処理
+        if ($request->filled('delete_images')) {
+            foreach ($request->delete_images as $imageId) {
+                $image = $post->images()->find($imageId);
+                if ($image) {
+                    // ストレージから画像ファイルを削除
+                    Storage::delete(str_replace('/storage', 'public', $image->img_url));
+                    // 画像レコードを削除
+                    $image->delete();
+                }
+            }
+        }
+
+        // 画像の処理
+        if ($request->hasFile('images')) {
+            //GDドライバ使う
+            $manager = new ImageManager(new Driver());
+            foreach ($request->file('images') as $imageFile) {
+
+                // 画像をIntervention Imageで読み込む
+                $image = $manager->read($imageFile->getRealPath());
+
+                // 画像をリサイズ（例：横幅を400pxに設定、縦横比を維持）
+                $image->scaleDown(width: 400);
+
+                // 圧縮して保存 (Quality: 70, JPEGの場合)
+                $compressedImage =
+                    $image->toJpeg(70);
+
+                // 画像の保存パスを生成
+                $filename = uniqid() . '.jpg';
+                //storage/app/public/images/に保存
+                $path = 'public/images/' . $filename;
+
+                // $compressedImageを$pathという名前で保存
+                //保存ディレクトリ：storage/app/public/内
+                Storage::put($path, $compressedImage);
+
+                // ファイルの相対パス(公開用パス)を取得
+                $imgUrl = Storage::url($path);
+
+                //Postモデルのimagesリレーションでimagesテーブルに保存
+                $posts->images()->create([
+                    'img_url' => $imgUrl,
+                ]);
+            }
+        }
 
         return redirect('/');
     }
@@ -265,7 +314,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // まず、投稿に関連する画像を取得
+        $images = $post->images;
+
+        // 画像ファイルを削除
+        foreach ($images as $image) {
+            // ストレージ内の画像ファイルを削除
+            Storage::delete(str_replace('/storage', 'public', $image->img_url));
+        }
         $post->delete();       //追加
-        return redirect('/');  //追加
+        return redirect('/dashboard');  //追加
     }
 }

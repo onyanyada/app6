@@ -115,7 +115,24 @@
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
                     </div>
-                  <!-- カラム８ -->
+                    <!-- カラム８ -->
+                    <div class="w-full md:w-1/1 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            画像
+                        </label>
+                        @if($post->images)
+                            @foreach($post->images as $image)
+                              <img src="{{ asset($image->img_url) }}" alt="Post Image" style="max-width: 300px;">                     
+                              <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"> この画像を削除
+                              @endforeach
+                        @endif
+                         <input type="file" name="images[]" multiple>
+
+                        @error('images')
+                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+                  <!-- カラム９ -->
                   <div class="flex flex-col">
                       <div class="text-gray-700 text-center px-4 py-2 m-2">
                              <x-button class="bg-blue-500 rounded-lg">更新</x-button>
