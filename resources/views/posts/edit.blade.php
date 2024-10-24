@@ -28,7 +28,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('posts/update/'.$post->id) }}" method="POST" class="w-full">
+            <form action="{{ url('posts/update/'.$post->id) }}" method="POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                 
                   <div class="flex flex-col px-2 py-2">
@@ -131,6 +131,9 @@
                         @error('images')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
+                        @foreach($errors->get('images.*') as $message)
+                          <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                         @endforeach
                     </div>
                   <!-- カラム９ -->
                   <div class="flex flex-col">
