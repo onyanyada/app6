@@ -128,6 +128,11 @@
                         @endif
                          <input type="file" name="images[]" multiple>
 
+                          {{-- <input id="image-input" type="file" name="images[]" multiple>
+                          <div id="preview-container" class="mt-2">
+                          <!-- プレビュー表示領域 -->
+                          </div> --}}
+
                         @error('images')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
