@@ -176,7 +176,10 @@ class PostController extends Controller
             }
         }
 
-        return redirect('/');
+        // return redirect('/');
+        return response()->json([
+            'redirect' => url('/')
+        ]);
     }
 
     /**
