@@ -28,7 +28,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('posts/update/'.$post->id) }}" method="POST" class="w-full" enctype="multipart/form-data">
+            <form action="{{ url('posts/update/'.$post->id) }}" id="create-form" method="POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                 
                   <div class="flex flex-col px-2 py-2">
@@ -126,12 +126,10 @@
                               <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"> この画像を削除
                               @endforeach
                         @endif
-                         <input type="file" name="images[]" multiple>
-
-                          {{-- <input id="image-input" type="file" name="images[]" multiple>
+                          <input id="image-input" type="file" name="images[]" multiple>
                           <div id="preview-container" class="mt-2">
                           <!-- プレビュー表示領域 -->
-                          </div> --}}
+                          </div>
 
                         @error('images')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
