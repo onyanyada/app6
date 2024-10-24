@@ -10,7 +10,7 @@
 
 
             <!-- 本のタイトル -->
-            <form action="{{ url('posts') }}" method="POST" class="w-full" enctype="multipart/form-data">
+            <form action="{{ url('posts') }}" id="create-form" method="POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                   <div class="flex flex-col px-2 py-2">
                    <!-- カラム１ -->

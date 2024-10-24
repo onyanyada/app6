@@ -30,8 +30,8 @@ $(document).ready(function () {
         event.target.value = '';
     });
 
-    // フォーム送信時にfileArrayの内容を送信
-    $('form').on('submit', function (e) {
+    //フォーム送信時にfileArrayの内容を送信
+    $('#create-form').on('submit', function (e) {
         e.preventDefault();  // デフォルトのフォーム送信を止める
 
         // FormDataを使ってファイルを送信する
