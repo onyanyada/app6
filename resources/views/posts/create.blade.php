@@ -104,7 +104,10 @@
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                           画像をアップロード
                       </label>
-                      <input type="file" name="images[]" multiple>
+                      <input id="image-input" type="file" name="images[]" multiple>
+                          <div id="preview-container" class="mt-2">
+                          <!-- プレビュー表示領域 -->
+                          </div>
                   </div>
                   <!-- カラム７ -->
                   <div class="flex flex-col">
@@ -117,4 +120,5 @@
     <!--左エリア[END]--> 
         
 </x-app-layout>
+
 
