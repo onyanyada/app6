@@ -12,7 +12,21 @@
     </x-slot>
     <div class="container">
         <h1>{{ $user->name }} のプロフィール</h1>
-
+        <!-- ユーザーのフォロー -->
+        @if (auth()->user()->isFollowing($user->id))
+            <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-red-500 text-white rounded-lg p-2">フォロー解除</button>
+            </form>
+        @else
+            <form action="{{ route('follow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-green-500 text-white rounded-lg p-2">フォロー</button>
+            </form>
+        @endif
+        <x-button>
+            <a href="{{ route('follow.index') }}">フォロー中のユーザー</a>
+        </x-button>
         <!-- ユーザーの自己紹介 -->
         @if($user->bio)
             <p>{{ $user->bio->name }}</p>

@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('post_index')" :active="request()->routeIs('post_index')">
                         {{ __('ホーム') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('follow.index')" :active="request()->routeIs('follow.index')">
+                        {{ __('フォロー') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('ダッシュボード') }}
                     </x-nav-link>

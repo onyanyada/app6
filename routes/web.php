@@ -12,6 +12,13 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BioController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
+
+// フォロー機能
+Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+Route::post('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
+Route::get('/follow', [FollowController::class, 'index'])->name('follow.index');
+
 
 // 投稿者の投稿一覧表示
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
