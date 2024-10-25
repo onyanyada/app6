@@ -27,7 +27,7 @@
                 <label for="img">プロフィール画像</label>
                 @if($bio->img_url)
                     <img src="{{ asset($bio->img_url) }}" alt="プロフィール画像" width="150">
-                    <input type="checkbox" name="delete_img" value="{{ $bio->id }}"> この画像を削除
+                    <input type="checkbox" name="delete_img" value="1"> この画像を削除
                 @endif
                 <input id="bio-input" type="file" name="img">
                 <div id="bio-preview" class="mt-2">

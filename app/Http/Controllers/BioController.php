@@ -154,6 +154,16 @@ class BioController extends Controller
         $bio->name = $request->name;
         $bio->body = $request->body;
 
+        // 画像削除処理
+        if ($request->has('delete_img') && $request->delete_img == '1') {
+            // 既存の画像がある場合、ストレージから削除
+            if ($bio->img_url && Storage::exists($bio->img_url)) {
+                Storage::delete($bio->img_url);
+            }
+            // img_urlをnullに設定
+            $bio->img_url = null;
+        }
+
 
         // 画像ファイルの処理
         if ($request->hasFile('img')) {
