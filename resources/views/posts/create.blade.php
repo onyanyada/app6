@@ -60,7 +60,7 @@
                     @enderror
                     </div>
                     <!-- カラム５ -->
-                    <div class="w-full md:w-1/1 px-3">
+                    <div id="price-container" class="hidden w-full md:w-1/1 px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         料金
                       </label>
