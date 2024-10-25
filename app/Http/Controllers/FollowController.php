@@ -21,10 +21,10 @@ class FollowController extends Controller
         return redirect()->back()->with('success', 'フォローを解除しました');
     }
 
-    public function index()
+    public function index(User $user)
     {
-        // フォロー中のユーザーを取得
-        $followings = auth()->user()->followings()->get(); // フォローしているユーザーのリストを取得
+        // 指定されたユーザーがフォローしているユーザーを取得
+        $followings = $user->followings()->get();
 
         return view('follow.index', ['followings' => $followings]);
     }

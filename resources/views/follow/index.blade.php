@@ -14,7 +14,7 @@
             <ul>
                 @foreach ($followings as $following)
                     <li class="p-2">
-                        <a href="{{ url('/follow/' . $following->id) }}" class="text-blue-500">
+                        <a href="{{ url('/user/' . $following->id) }}" class="text-blue-500">
                             {{ $following->name }}
                         </a>
                     </li>

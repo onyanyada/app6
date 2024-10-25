@@ -17,7 +17,7 @@ use App\Http\Controllers\FollowController;
 // フォロー機能
 Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
 Route::post('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
-Route::get('/follow', [FollowController::class, 'index'])->name('follow.index');
+Route::get('/follow/{user}', [FollowController::class, 'index'])->name('follow.index');
 
 
 // 投稿者の投稿一覧表示

@@ -25,7 +25,7 @@
             </form>
         @endif
         <x-button>
-            <a href="{{ route('follow.index') }}">フォロー中のユーザー</a>
+            <a href="{{ route('follow.index', ['user' => $user->id]) }}">フォロー中のユーザー</a>
         </x-button>
         <!-- ユーザーの自己紹介 -->
         @if($user->bio)
