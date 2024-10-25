@@ -71,9 +71,17 @@
                 <p>{{ $post->comments->count() }} 件のコメント</p>
                 <p>{{ $post->likes->count() }}件のいいね</p>
                 @if($post->user && $post->user->bio)
-                <p>投稿者：{{ $post->user->bio->name}}</p>
+                    <p>投稿者：
+                        <a href="{{ url('/user/' . $post->user->id) }}">
+                            {{ $post->user->bio->name }}
+                        </a>
+                    </p>
                 @else
-                    <p>投稿者：{{ $post->user->name }}</p>
+                    <p>投稿者：
+                        <a href="{{ url('/user/' . $post->user->id) }}">
+                            {{ $post->user->name }}
+                        </a>
+                    </p>
                 @endif
                 @if($post->tags)                 
                 <p>タグ:

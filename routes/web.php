@@ -11,6 +11,11 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BioController;
+use App\Http\Controllers\UserController;
+
+// 投稿者の投稿一覧表示
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/bio', [BioController::class, 'index'])->name('bio.index');

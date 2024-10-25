@@ -1,5 +1,5 @@
 import './bootstrap';
-import './post';
+import './post-imgs';
 import './bio';
 import Alpine from 'alpinejs';
 

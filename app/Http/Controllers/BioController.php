@@ -56,7 +56,7 @@ class BioController extends Controller
         //バリデーション
         $validator = Validator::make($request->all(), [
             'name' => 'required | min:1 | max:255',
-            'body' => 'required | min:1 | max:255',
+            'body' => 'nullable | min:1 | max:255',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // 画像のバリデーション
 
         ]);
@@ -134,8 +134,8 @@ class BioController extends Controller
     {
         //バリデーション
         $validator = Validator::make($request->all(), [
-            'name' => 'required | min:1 | max:255',
-            'body' => 'required | min:1 | max:255',
+            'name' => 'nullable | min:1 | max:255',
+            'body' => 'nullable | min:1 | max:255',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // 画像のバリデーション
 
         ]);
